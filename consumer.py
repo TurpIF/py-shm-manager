@@ -1,4 +1,5 @@
 from multiprocessing.managers import BaseManager
+from queue import Empty
 
 class QueueManager(BaseManager):
     pass
@@ -13,7 +14,10 @@ manager.connect()
 queue = manager.get_queue()
 try:
     while True:
-        value = queue.get()
+        try:
+            value = queue.get_nowait()
+        except Empty:
+            break
         print('Réception :', value)
 except KeyboardInterrupt:
     pass

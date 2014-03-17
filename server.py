@@ -9,5 +9,5 @@ QueueManager.register('get_queue', lambda: queue)
 
 PORT = 4242
 KEY = bytes('my-key', 'ascii')
-manager = QueueManager('/tmp/coucou', authkey=KEY)
+manager = QueueManager(('', PORT), authkey=KEY)
 manager.get_server().serve_forever()
